@@ -17,12 +17,7 @@ def reverse_array_optimal(list_to_reverse):
     right_pointer = len(list_to_reverse) -1 
 
     while left_pointer < right_pointer:
-        left_pointer_value = list_to_reverse[left_pointer]
-        right_pointer_value = list_to_reverse[right_pointer]
-
-        list_to_reverse[left_pointer] = right_pointer_value
-        list_to_reverse[right_pointer] = left_pointer_value
-
+        list_to_reverse[left_pointer], list_to_reverse[right_pointer] = list_to_reverse[right_pointer], list_to_reverse[left_pointer]
         left_pointer += 1
         right_pointer -= 1
     return list_to_reverse
