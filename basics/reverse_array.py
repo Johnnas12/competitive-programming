@@ -22,8 +22,17 @@ def reverse_array_optimal(list_to_reverse):
         right_pointer -= 1
     return list_to_reverse
 
+# approach two implement the above by only using one pointer and halving the array the time and space complexity will be the same
+def reverse_array_optimal_2(list_to_reverse):
+    n = len(list_to_reverse)
+    for i in range(n // 2):
+        list_to_reverse[i], list_to_reverse[n-i-1] = list_to_reverse[n-i-1], list_to_reverse[i]
+    return list_to_reverse
+
+
 
 if __name__ == "__main__":
     original_array = [1, 4, 3, 2, 6, 5]
     print(reverse_array(original_array))
     print(reverse_array_optimal(original_array))
+    print(reverse_array_optimal_2(original_array))
