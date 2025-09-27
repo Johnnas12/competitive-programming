@@ -11,7 +11,11 @@ def minmax(arr):
             max = arr[i]
     return min, max
 
+
 def minmax2(arr):
+    '''
+    Using built-in function sort()
+    '''
     arr.sort()
     minmax = {"min": arr[0], "max": arr[-1]}
     return minmax
