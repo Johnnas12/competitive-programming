@@ -1,75 +1,47 @@
-def prefix_sum_2d(arr):
-    rows = len(arr)
-    cols = len(arr[0])
+def prefix_sum_2d(mat, queries):
+    rows = len(mat)
+    cols = len(mat[0])
 
-    result = [[0] * cols for _ in range(rows)]
+    prefix = [[0] * cols for _ in range(cols)]
 
     for i in range(rows):
-        for j  in range(cols):
-            result[i][j] = arr[i][j]
-
+        for j in range(cols):
+            prefix[i][j] = mat[i][j]
+            # Adding the left
             if i > 0:
-                result[i][j] += result[i-1][j]
+                prefix[i][j] += prefix[i - 1][j]
+            # adding the top
             if j > 0:
-                result[i][j] += result[i][j-1]
+                prefix[i][j] += prefix[i][j - 1]
+            # removing overlapping
             if j > 0 and i > 0:
-                result[i][j] -= result[i-1][j-1]
-    return result
+                prefix[i][j] -= prefix[i-1][j-1]
 
-
-'''
-Querying sum of submatrices using prefix sum
-'''
-
-def query_submatrix_sum(arr, queries):
-    rows = len(arr)
-    cols = len(arr[0])
-
-    # 1 based indexing
-    pre = [[0] * (cols + 1) for _ in range(rows + 1)]
-
-    for i in range(1, rows + 1):
-        for j in range(1, cols + 1):
-            pre[i][j] = arr[i - 1][j - 1] \
-                        + pre[i - 1][j] \
-                        + pre[i][j - 1] \
-                        - pre[i - 1][j - 1]
-        result = []
-
-    # process each query using inclusion-exclusion
+    #initialize my result
+    result = []
+    
+    # declare and assigning top_row, left_col, bottom_row and right_col from query
     for q in queries:
-        topRow = q[0] + 1
-        leftCol = q[1] + 1
-        bottomRow = q[2] + 1
-        rightCol = q[3] + 1
+        top_row = q[0]
+        left_col = q[1]
+        bottom_row = q[2]
+        right_col = q[3]
+    # total sum we can get
+    total = prefix[bottom_row][right_col]
+    # top that we remove later
+    top = prefix[top_row - 1][right_col]
+    # left that we remove later
+    left = prefix[bottom_row][left_col - 1]
+    # the overlap that we will add from what we removed
+    overlap = prefix[top_row -1][left_col - 1]
 
-        # get total area from (1,1) to (bottomRow, rightCol)
-        total = pre[bottomRow][rightCol]
-
-        # subtract area above the submatrix
-        top = pre[topRow - 1][rightCol]
-
-        # subtract area to the left of the submatrix
-        left = pre[bottomRow][leftCol - 1]
-
-        # add back the overlapping top-left area,
-        # which was subtracted twice
-        overlap = pre[topRow - 1][leftCol - 1]
-
-        # final submatrix sum using inclusion-exclusion
-        result.append(total - top - left + overlap)
+    # do the operation and append it to our result
+    result.append(total - top - left + overlap)
 
     return result
-            
 
 
 if __name__ == "__main__":
-    arr = [[1,2,3,4],
-           [5,6,7,8], 
-           [9,10,11,12],
-           [13,14,15,16]]
-    print(prefix_sum_2d(arr))
-
     mat = [
         [1, 2, 3, 4],
         [5, 6, 7, 8],
@@ -79,5 +51,5 @@ if __name__ == "__main__":
     queries = [
         [1, 1, 2, 2]
     ]
-    result = query_submatrix_sum(mat, queries)
+    result = prefix_sum_2d(mat, queries)
     print(result)
