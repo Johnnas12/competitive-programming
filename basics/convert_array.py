@@ -25,6 +25,10 @@ def convert(arr):
 
 
 def convert_better(arr):
+    '''
+    Better approach from the previous one, this one runs O(nlogn) time complexity as we use sort builtin function wich runs logn and loop through elements
+    which runs O(n) and the space complexity would be O(n)
+    '''
     # creating temporary array and copy over all the elements of original lists
     tmp = [arr[i] for i in range(len(arr))]
     # use builtin sort function
