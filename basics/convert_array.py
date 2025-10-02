@@ -1,3 +1,5 @@
+import heapq
+
 def convert(arr):
     '''
     this is a naive approach to solve convert array problem time complexity is O(n^2) and space complexity would be 0(n)
@@ -48,10 +50,46 @@ def convert_better(arr):
 
     return arr
 
+
+def convert_another_approach(arr):
+    '''
+    This approach involves using priority queue instead of calling sort() function the time complexity is O(NLOGN) and space complexity is O(N)
+
+    '''
+
+    # create temporary arr with copy of original arr values
+    tmp = list(arr)
+    # initialize our priority queue with an empty list
+    pq = []
+
+    # inserting the original array values to our queue
+    for i in range(len(arr)):
+        heapq.heappush(pq, arr[i])
+
+    i = 0
+    while len(pq) != 0:
+        tmp[i] = heapq.heappop(pq)
+        i+=1
+
+    umap = {}
+
+    val = 0
+    for i in range(len(arr)):
+        umap[tmp[i]] = val
+        val += 1
+
+    for i in range(len(arr)):
+        arr[i] = umap[arr[i]]
+
+    return arr
+
+    
 if __name__ == '__main__':
     arr = [10, 20, 15, 12, 11, 50]
     print(convert(arr))
     test = [10, 20, 15, 12, 11, 50]
     print(convert_better(test))
+    priority_queue_app = [10, 20, 15, 12, 11, 50]
+    print(convert_another_approach(priority_queue_app))
 
 
