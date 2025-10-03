@@ -35,7 +35,25 @@ def equilbrium_point(arr):
             return i
     return -1
 
+def equilbrium_point_optimal(arr):
+    '''
+    Reduced Space complexity to O(1) from O(n)
+    '''
+    # initiallize our total and left which is 0
+    total = sum(arr[:])
+    left = 0
+
+    # arr: [1,2,0,3] <- original array
+    for i in range(len(arr)):
+        right = total - arr[i] - left
+        if right == left:
+            return i
+        left += arr[i]
+    return -1
+
+
 
 if __name__ == "__main__":
     test_array = [1,2,0,3]
     print(equilbrium_point(test_array))
+    print(equilbrium_point_optimal(test_array))
