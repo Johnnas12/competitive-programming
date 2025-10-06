@@ -17,7 +17,9 @@ def indexes_of_subarray(arr, target):
         if extra_sum in umap:
             j = umap[extra_sum]
             return j+2, i+1
-        umap[sum] = i
+        
+        if sum not in umap:
+            umap[sum] = i
     return [-1]
 
 
