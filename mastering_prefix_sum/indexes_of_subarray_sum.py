@@ -22,9 +22,6 @@ def indexes_of_subarray(arr, target):
             umap[sum] = i
     return [-1]
 
-
-
-
 if __name__ == "__main__":
     arr = [1, 2, 3, 7, 5]
     target = 12

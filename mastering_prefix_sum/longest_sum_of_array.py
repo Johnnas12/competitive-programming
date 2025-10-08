@@ -19,9 +19,6 @@ def longest_sum_of_array(arr, target):
     return res
 
 
-
-    
-
 if __name__ == "__main__":
     arr = [10, 5, 2, 7, 1, -10]
     target = 15
