@@ -27,7 +27,3 @@ Browse the folders for code samples and explanations. Each topic includes practi
 ## Contributing
 
 Feel free to submit pull requests for improvements or new algorithms.
-
-## License
-
-MIT
