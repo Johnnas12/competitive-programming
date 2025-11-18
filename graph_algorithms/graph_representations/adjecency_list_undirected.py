@@ -1,6 +1,8 @@
 '''
 This implementation focuses on representing graphs in the list form,
 The algorithm it really simple we will just append the neigbor vertices of current vertex
+
+UNDIRECTED GRAPH
 '''
 
 def create_graph(V, edges):
